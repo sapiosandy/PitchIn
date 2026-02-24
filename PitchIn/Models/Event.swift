@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct Event: Identifiable, Codable, Sendable {
+    let id: UUID
+    var title: String
+    var date: Date
+    var location: String
+    var items: [EventItem]
+    
+}
