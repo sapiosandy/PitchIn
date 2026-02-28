@@ -10,7 +10,7 @@ import Foundation
 class LocalEventRepository: EventRepository {
 
     private let defaults: UserDefaults
-    private let key = "pitchin_ events"
+    private let key = "pitchin_events"
     
     init (defaults: UserDefaults = .standard) {
         self.defaults = defaults

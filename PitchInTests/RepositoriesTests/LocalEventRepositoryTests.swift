@@ -10,19 +10,20 @@ import Foundation
 @testable import PitchIn
 
 struct LocalEventRepositoryTests {
+    
     private func makeSUT() -> LocalEventRepository {
         let defaults = UserDefaults(suiteName: "test_suite")!
         defaults.removePersistentDomain(forName: "test_suite")
         return LocalEventRepository(defaults: defaults)
     }
 
-    @Test func fetchAll_whenEmpty_returnsEmptyArray() async throws {
+    @Test @MainActor func fetchAll_whenEmpty_returnsEmptyArray() async throws {
         let sut = makeSUT()
         let events = try await sut.fetchAll()
         #expect(events.isEmpty)
     }
 
-    @Test func save_thenFetchAll_returnsEvent() async throws {
+    @Test @MainActor func save_thenFetchAll_returnsEvent() async throws {
         let sut = makeSUT()
         let event = Event(
             id: UUID(),
@@ -37,7 +38,7 @@ struct LocalEventRepositoryTests {
         #expect(fetched.first?.title == "BBQ")
     }
 
-    @Test func delete_removesCorrectEvent() async throws {
+    @Test @MainActor func delete_removesCorrectEvent() async throws {
         let sut = makeSUT()
         let event = Event(
             id: UUID(),
@@ -52,7 +53,7 @@ struct LocalEventRepositoryTests {
         #expect(fetched.isEmpty)
     }
 
-    @Test func update_modifiesExistingEvent() async throws {
+    @Test @MainActor func update_modifiesExistingEvent() async throws {
         let sut = makeSUT()
         var event = Event(
             id: UUID(),
