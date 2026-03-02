@@ -11,11 +11,7 @@ import Foundation
 
 struct LocalEventRepositoryTests {
     
-    private func makeSUT() -> LocalEventRepository {
-        let defaults = UserDefaults(suiteName: "test_suite")!
-        defaults.removePersistentDomain(forName: "test_suite")
-        return LocalEventRepository(defaults: defaults)
-    }
+    
 
     @Test @MainActor func fetchAll_whenEmpty_returnsEmptyArray() async throws {
         let sut = makeSUT()
